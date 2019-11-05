@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  database:
+    image: "postgres"
+    container_name: "database-container"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password1234
+      - POSTGRES_DB=db
+    ports:
+      - "54320:5432"
