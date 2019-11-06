@@ -33,19 +33,18 @@ public class ProductController {
     // TODO implement in content service: by cat id
 
 
-    @GetMapping(value = "/search")
-    public ResponseEntity<Iterable<Product>> searchProducts(@RequestParam String searchDescription,
-                                                            @RequestParam double searchMinPrice, @RequestParam double searchMaxPrice) {
+    @PostMapping(value = "/search")
+    public ResponseEntity<Iterable<Product>> searchProducts(@RequestBody SearchRequest searchRequest) {
 
-        if (searchMinPrice < 0) {
-            searchMinPrice = 0;
+        if (searchRequest.getMinPrice() < 0) {
+            searchRequest.setMinPrice(0);
         }
 
-        if (searchMaxPrice < searchMinPrice) {
-            searchMaxPrice = Double.MAX_VALUE;
+        if (searchRequest.getMaxPrice() < searchRequest.getMinPrice()) {
+            searchRequest.setMaxPrice(Double.MAX_VALUE);
         }
         Iterable<Product> products = this.productRepository.findProductsByDetailsContainingIgnoreCaseAndPriceBetween(
-                searchDescription, searchMinPrice, searchMaxPrice);
+                searchRequest.getDescription(), searchRequest.getMinPrice(), searchRequest.getMaxPrice());
         return new ResponseEntity<>(products, HttpStatus.OK);
 
     }
@@ -79,6 +78,11 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "cat/{categoryId}")
+    public ResponseEntity<Iterable<Product>> getProductsByCategoryId(@PathVariable long categoryId) {
+        return new ResponseEntity<Iterable<Product>>(productRepository.findProductsByCategoryId(categoryId), HttpStatus.OK);
     }
 
 

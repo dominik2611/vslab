@@ -13,6 +13,8 @@ public class CategoryController {
     @Autowired
     private CategoryClient categoryClient;
 
+
+
     @GetMapping
     public ResponseEntity<Iterable<Category>> getCategories() {
         return new ResponseEntity<Iterable<Category>>(categoryClient.getCategories(), HttpStatus.OK);
@@ -35,8 +37,8 @@ public class CategoryController {
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable long id) {
         categoryClient.deleteCategory(id);
-        // TODO
-       // productClient.deleteProductsByCategoryId(id);
+        // TODO delete all products in category
+
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
