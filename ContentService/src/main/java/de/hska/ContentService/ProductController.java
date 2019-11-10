@@ -43,14 +43,14 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<Long> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         long categoryId = product.getCategoryId();
         if (categoryClient.getCategoryById(categoryId) == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        long id = productClient.addProduct(product);
-        return new ResponseEntity<Long>(id, HttpStatus.OK);
+       Product product1 = productClient.addProduct(product);
+        return new ResponseEntity<Product>(product1, HttpStatus.OK);
     }
 
 

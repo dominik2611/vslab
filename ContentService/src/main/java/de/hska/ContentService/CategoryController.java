@@ -27,10 +27,10 @@ public class CategoryController {
 
 
 
-
-    public ResponseEntity<Long> createCategory(@RequestBody Category category) {
-        long categoryId = categoryClient.addCategory(category);
-        return new ResponseEntity<Long>(categoryId, HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
+        Category categoryId = categoryClient.addCategory(category);
+        return new ResponseEntity<Category>(categoryId, HttpStatus.CREATED);
     }
 
 

@@ -13,7 +13,7 @@ public class CategoryClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String CATEGORY_URL = "http://localhost:8002/categories";
+    private final String CATEGORY_URL = "http://categoryservice:8002/categories";
 
     public Iterable<Category> getCategories() {
 
@@ -29,11 +29,11 @@ public class CategoryClient {
         return cat;
     }
 
-    public long addCategory(Category category) {
+    public Category addCategory(Category category) {
         Category cat = restTemplate.postForObject(CATEGORY_URL, category,
                 Category.class);
 
-        return cat.getId();
+        return cat;
     }
 
     public void deleteCategory(long categoryId) {

@@ -13,7 +13,7 @@ public class ProductClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String PRODUCT_URL = "http://localhost:8001/products";
+    private final String PRODUCT_URL = "http://productservice:8001/products";
 
     public Iterable<Product> getProducts() {
 
@@ -43,10 +43,10 @@ public class ProductClient {
         return Arrays.asList(products);
     }
 
-    public long addProduct(Product product) {
+    public Product addProduct(Product product) {
         Product prod = restTemplate.postForObject(PRODUCT_URL, product, Product.class);
 
-        return prod.getId();
+        return prod;
     }
 
     public void deleteProduct(long productId) {

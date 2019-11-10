@@ -53,6 +53,20 @@ services:
       local_net:
         aliases:
           - userservice
+
+  contentservice:
+    depends_on:
+      - productservice
+      - categoryservice
+    build:
+      context: ./contentservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8004:8004"
+    networks:
+      local_net:
+        aliases:
+          - contentservice
 networks:
   local_net:
     driver: bridge
