@@ -17,6 +17,7 @@ services:
 
   categoryservice:
     depends_on:
+      - eureka
       - database
     build:
       context: ./categoryservice
