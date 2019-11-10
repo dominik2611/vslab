@@ -15,6 +15,19 @@ services:
         aliases:
           - databaseservice
 
+  zuul:
+    depends_on:
+      - eureka
+    build:
+      context: ./zuulservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8020:8020"
+    networks:
+      local_net:
+        aliases:
+          - zuul
+
   categoryservice:
     depends_on:
       - eureka
@@ -44,6 +57,7 @@ services:
 
   userservice:
     depends_on:
+      - eureka
       - database
     build:
       context: ./userservice
@@ -57,6 +71,7 @@ services:
 
   contentservice:
     depends_on:
+      - eureka
       - productservice
       - categoryservice
     build:
@@ -79,6 +94,21 @@ services:
       local_net:
         aliases:
           - contentservice
+
+  hystrix:
+    depends_on:
+      - eureka
+    build:
+      context: ./hystrixdashboard
+      dockerfile: ./Dockerfile
+    ports:
+      - "8010:8010"
+    networks:
+      local_net:
+        aliases:
+          - hystrix
+
+
 networks:
   local_net:
     driver: bridge

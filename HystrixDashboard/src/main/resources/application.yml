@@ -1,8 +1,8 @@
 server:
-  port: 8004
+  port: 8010
 spring:
   application:
-    name: content-service
+    name: hystrix-service
 
 eureka:
   client:

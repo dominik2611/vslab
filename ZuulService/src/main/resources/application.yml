@@ -1,0 +1,20 @@
+server:
+  port: 8020
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+
+zuul:
+  ignored-services: "*"
+  routes:
+    user-service:
+      path: /users/**
+      service-id: user-service
+      strip-prefix: false
+    catalog-service:
+      path: /**
+      service-id: content-service
+      strip-prefix: true
