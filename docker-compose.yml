@@ -27,7 +27,7 @@ services:
       local_net:
         aliases:
           - categoryservice
-          -
+
   productservice:
     depends_on:
       - database
