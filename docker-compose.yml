@@ -40,6 +40,19 @@ services:
       local_net:
         aliases:
           - productservice
+
+  userservice:
+    depends_on:
+      - database
+    build:
+      context: ./userservice
+      dockerfile: ./Dockerfile
+    ports:
+      - "8003:8003"
+    networks:
+      local_net:
+        aliases:
+          - userservice
 networks:
   local_net:
     driver: bridge
