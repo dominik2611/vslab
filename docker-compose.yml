@@ -67,6 +67,17 @@ services:
       local_net:
         aliases:
           - contentservice
+
+  eureka:
+    build:
+      context: ./eurekaserver
+      dockerfile: ./Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      local_net:
+        aliases:
+          - contentservice
 networks:
   local_net:
     driver: bridge

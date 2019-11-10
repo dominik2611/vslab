@@ -35,9 +35,9 @@ public class ProductController {
     public ResponseEntity<Iterable<Product>> searchProduct(@RequestBody SearchRequest searchRequest) {
 
 
-            return new ResponseEntity<Iterable<Product>>(
-                    productClient.searchProducts(searchRequest),
-                    HttpStatus.OK);
+        return new ResponseEntity<Iterable<Product>>(
+                productClient.searchProducts(searchRequest),
+                HttpStatus.OK);
 
     }
 
@@ -49,7 +49,7 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-       Product product1 = productClient.addProduct(product);
+        Product product1 = productClient.addProduct(product);
         return new ResponseEntity<Product>(product1, HttpStatus.OK);
     }
 
