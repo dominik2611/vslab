@@ -9,6 +9,9 @@ eureka:
 
 zuul:
   ignored-services: "*"
+  ribbon:
+    eager-load:
+      enabled: true
   routes:
     user-service:
       path: /users/**
